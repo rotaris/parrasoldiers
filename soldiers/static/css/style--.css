@@ -1,0 +1,65 @@
+
+body {
+    background: #efebe9;
+    background-image: url(http://subtlepatterns.com/patterns/halftone.png);
+    color: #2E3444;
+    font-size: 100%;
+    line-height: 1.25;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+
+      -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: #FF2A48;
+    text-decoration: none;
+    outline: none;
+}
+
+a:hover, a:focus {
+    color: #2E3444;
+}
+
+
+.grid-wrap {
+    clear: both;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1260px;
+}
+
+.grid {
+    margin: 30px auto;
+    padding: 0;
+    list-style: none;
+    min-height: 500px;
+}
+
+.grid li {
+    display: inline-block;
+    overflow: hidden;
+    width: 300px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.js .grid {
+    background: url(../img/loading.gif) no-repeat 50% 100px;
+}
+
+.js .grid.loaded {
+    background: none;
+}
+
+.js .grid li {
+    display: none;
+    float: left;
+}
+
+.js .grid.loaded li {
+    display: block;
+}
+
+
+.grid-item { width: 300px; }

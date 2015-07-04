@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+{% load staticfiles %}
+
+<title>WW1 Parramatta Soldiers</title>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}" />
+<script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body id="home">
+
+
+
+<!-- <section class="grid-wrap"> -->
+<div class="container">
+	<div class="col-md-12">
+		<h1> WW1 Parramatta Soldiers</h1>
+
+		<div class="row">
+		{% if soldiers %}
+		    <ul class="grid effect-1" id="grid">
+		    {% for soldier in soldiers %}
+		        <li><a href="{% url 'soldier_detail' soldier.unique_id %}"><img src="{{ soldier.get_photo_url }}" alt="{{ soldier.name }} {{ soldier.surname }}"></a><h3>{{ soldier.rank }} {{ soldier.name }} {{ soldier.surname }}</h3></a></li>
+		    {% endfor %}
+		    </ul>
+		{% else %}
+		    <p>No results found.</p>
+		{% endif %}
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
+<!-- <script src="{% static "js/masonry.pkgd.min.js" %}"></script> -->
+
+<script src="{% static "js/imagesloaded.js" %}"></script>
+<script src="{% static "js/classie.js" %}"></script>
+<script src="{% static "js/AnimOnScroll.js" %}"></script>
+
+
+<script>
+	new AnimOnScroll( document.getElementById( 'grid' ), {
+		minDuration : 0.4,
+		maxDuration : 0.7,
+		viewportFactor : 0.2
+	} );
+</script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+
+body {
+    background: #efebe9;
+    background-image: url(http://subtlepatterns.com/patterns/halftone.png);
+    color: #2E3444;
+    font-size: 100%;
+    line-height: 1.25;
+    font-family: 'Merriweather', sans-serif;
+    font-weight: 300;
+
+      -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: #FF2A48;
+    text-decoration: none;
+    outline: none;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+/* ================================ */
+
+body h1 {
+    font-size: 5.6em;
+    margin: 1em auto;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+table tr {
+    font-size: 1.6em;
+
+    padding-bottom: 5em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+tr th, tr td {
+    padding: 14px 0;
+}
+
+table tr th {
+    width: 20%;
+    padding-right: 20px;
+    text-transform: uppercase;
+    vertical-align: top;
+    text-align: right;
+}
+
+
+/*============*/
+.grid li h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 15px;
+    width: 100%;
+    background: #2E3444;
+    color: #D3EEE2;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    font-size: 1em;
+    -webkit-transition: -webkit-transform 0.2s, color 0.2s;
+    transition: transform 0.2s, color 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Pseudo element for hover effect */
+.grid li > a::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100.5%;
+    height: 100.5%;
+    border: 0px solid transparent;
+    background: rgba(0,0,0,0);
+    content: '';
+    -webkit-transition: border-width 0.2s, border-color 0.2s;
+    transition: border-width 0.2s, border-color 0.2s;
+}
+
+
+
+
+
+/*============*/
+
+.grid {
+    /*max-width: 69em;*/
+    list-style: none;
+    margin: 0px auto;
+    padding: 0;
+    background-image: url(http://subtlepatterns.com/patterns/dark_embroidery.png);
+    padding-left: 0%;
+}
+
+.grid li {
+    display: block;
+    float: left;
+    /*padding: 7px;*/
+    width: 32%;
+    opacity: 0;
+    /*border: 5px solid #5d4037;*/
+    /*padding: 15px;*/
+    margin: 0.64%;
+
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    box-shadow: 1px 1px 15px #000;
+}
+
+.grid li.shown,
+.no-js .grid li,
+.no-cssanimations .grid li {
+    opacity: 1;
+}
+
+.grid li a,
+.grid li img {
+    outline: none;
+    border: none;
+    display: block;
+    max-width: 100%;
+}
+
+/* Effect 1: opacity */
+.grid.effect-1 li.animate {
+    -webkit-animation: fadeIn 0.65s ease forwards;
+    animation: fadeIn 0.65s ease forwards;
+}
+
+@-webkit-keyframes fadeIn {
+    0% { }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+{% load staticfiles %}
+
+<title>WW1 Parramatta Soldiers</title>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}" />
+<script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
+<link href='http://fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body id="soldier-detail">
+
+
+
+<!-- <section class="grid-wrap"> -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>{{ soldier }}</h1>
+
+			<div class="row">
+				<div class="col-md-4">
+					<p><img class="img-responsive" src="{{ soldier.get_photo_url }}" alt="{{ soldier }}"></p>
+				</div>
+				<div class="col-md-8">
+					<table>
+						<tr>
+							<th>Service No</th>
+							<td>{{ soldier.service_no|default:"Unknown" }}</td>
+						</tr>
+						<tr>
+							<th>Rank</th>
+							<td>{{ soldier.rank|default:"Unknown" }}</td>
+						</tr>
+						<tr>
+							<th>Unit Served</th>
+							<td>{{ soldier.unit_served|default:"Unknown" }}</td>
+						</tr>
+						<tr>
+							<th>Date of Embarkation</th>
+							<td>{{ soldier.date_of_embarkation|date:"N jS, Y"|default:"Unknown" }}</td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td>{{ soldier.desc|default:"Unknown" }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>
