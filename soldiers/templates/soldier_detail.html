@@ -9,7 +9,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}" />
 <script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
-<link href='http://fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -25,7 +25,7 @@
 
 			<div class="row">
 				<div class="col-md-4">
-					<p><img class="img-responsive" src="{{ soldier.get_photo_url }}" alt="{{ soldier }}"></p>
+					<p><img class="img-responsive" src="{% static photo_url %}" alt="{{ soldier }}"></p>
 				</div>
 				<div class="col-md-8">
 					<table>

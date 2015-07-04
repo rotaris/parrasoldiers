@@ -9,11 +9,13 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}" />
 <script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
-<link href='http://fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
 
 </head>
 
 <body id="home">
+
+
 
 
 
@@ -25,8 +27,9 @@
 		<div class="row">
 		{% if soldiers %}
 		    <ul class="grid effect-1" id="grid">
-		    {% for soldier in soldiers %}
-		        <li><a href="{% url 'soldier_detail' soldier.unique_id %}"><img src="{{ soldier.get_photo_url }}" alt="{{ soldier.name }} {{ soldier.surname }}"></a><h3>{{ soldier.rank }} {{ soldier.name }} {{ soldier.surname }}</h3></a></li>
+		    {% for soldier, photo_url in soldiers %}
+
+		        <li><a href="{% url 'soldier_detail' soldier.unique_id %}"><img src="{% static photo_url %}" alt="{{ soldier.name }} {{ soldier.surname }}"></a><h3>{{ soldier.rank }} {{ soldier.name }} {{ soldier.surname }}</h3></a></li>
 		    {% endfor %}
 		    </ul>
 		{% else %}
@@ -38,6 +41,33 @@
 
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<!--
+<script>
+// Preload images (by Arun)
+$.preloadImages = function() {
+  for (var i = 0; i < arguments.length; i++) {
+    $("<img />").attr("src", arguments[i]);
+  }
+}
+
+var photos = [];
+{% for soldier, photo_url in soldiers %}
+photos.push("{% static photo_url %}");
+{% endfor %}
+
+photos = photos.slice(0, 3);
+var i;
+for (i = 0; i < photos.length; i++) {
+  var photo = photos[i];
+  $.preloadImages(photo);
+}
+</script>
+-->
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
 <!-- <script src="{% static "js/masonry.pkgd.min.js" %}"></script> -->
 
@@ -53,6 +83,20 @@
 		viewportFactor : 0.2
 	} );
 </script>
+
+
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/packery/1.4.2/packery.pkgd.min.js"></script>
+
+<script>
+var $container = $('#grid');
+// init
+$container.packery({
+  itemSelector: '.item',
+  gutter: 10
+});
+</script>
+-->
 
 </body>
 </html>
