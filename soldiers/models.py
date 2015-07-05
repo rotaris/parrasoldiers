@@ -19,11 +19,14 @@ class Soldier(models.Model):
     #survival_stories = models.CharField(max_length=40, blank=True, default="")
     #finished = models.CharField(max_length=40, blank=True, default="")
 
-    def __str__(self):
+    def get_full_name(self):
         if self.rank:
             return self.rank + " " + self.name + " " + self.surname.upper()
         else:
             return self.name + "' " + self.surname.upper()
+
+    def __str__(self):
+        return self.get_full_name()
    
     # There probably is a better way to do this than hardcoding it
     def get_photo_url(self):

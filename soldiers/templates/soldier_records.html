@@ -4,7 +4,7 @@
 <head>
 {% load staticfiles %}
 
-<title>WW1 Parramatta Soldiers</title>
+<title>Records for {{ soldier }}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -52,6 +52,7 @@
        }
        else{
        	   var unique_id = "{{ soldier.get_unique_id }}";
+           var name = "{{ soldier.get_full_name|urlencode }}";
            Mirador({
              "id": "viewer",
              "currentWorkspaceType": "singleObject",
@@ -59,12 +60,12 @@
              "layout": "1x1",
              "data": [
                { 
-                   "manifestUri": "http://104.237.136.241:5000/iiif/soldier/manifest?id=" + unique_id + "&name=Sgt%20Brody"}],
+                   "manifestUri": "http://104.237.136.241:5000/iiif/soldier/manifest?id=" + unique_id + "&name=" + name}],
               "windowObjects": [
                      {
-                         "loadedManifest": "http://104.237.136.241:5000/iiif/soldier/manifest?id=" + unique_id + "&name=Sgt%20Brody",
+                         "loadedManifest": "http://104.237.136.241:5000/iiif/soldier/manifest?id=" + unique_id + "&name=" + name,
                          "viewType" : "ImageView",
-                         "canvasID": "http://104.237.136.241:5000/iiif/soldier/manifest?id=" + unique_id + "&name=Sgt%20Brody"
+                         "canvasID": "http://104.237.136.241:5000/iiif/soldier/manifest?id=" + unique_id + "&name=" + name
                       }]
            });
        }
