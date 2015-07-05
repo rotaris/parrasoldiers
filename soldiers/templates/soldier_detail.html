@@ -25,6 +25,11 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{ soldier }}</h1>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="pull-right"><a href="{% url 'soldier_records' soldier.unique_id %}" class="btn btn-default">View Soldier Records</a></div>
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="col-md-4">
