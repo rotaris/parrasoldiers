@@ -17,7 +17,8 @@ from django.conf.urls import include, url
 from soldiers import views
 
 urlpatterns = [
-    url(r'^all', views.all_soldiers),
+    url(r'^all', views.all_soldiers, name='home'),
+    url(r'^list_all_soldiers$', views.list_all_soldiers, name='list_all_soldiers'),
     url(r'^(?P<unique_id>[0-9]+)/records/', views.soldier_records, name='soldier_records'),
     url(r'^(?P<unique_id>[0-9]+)', views.soldier_detail, name='soldier_detail'),
 ]

@@ -21,47 +21,69 @@
 
 <!-- <section class="grid-wrap"> -->
 <div class="container">
-	<div class="col-md-12">
-		<h1><span>&#8212;&#10087;</span> WW1 Parramatta Soldiers <span>&#10087;&#8212;</span></h1>
-
-		<div class="row">
-		{% if soldiers %}
-			<div class="loading">
-				<div class="sk-spinner sk-spinner-wave">
-			      <div class="sk-rect1"></div>
-			      <div class="sk-rect2"></div>
-			      <div class="sk-rect3"></div>
-			      <div class="sk-rect4"></div>
-			      <div class="sk-rect5"></div>
-			    </div>
-
-
-				<p class="lead">Loading results...</p>
-
-				<p class="lead">
-					<script>
-						var tidbits = ["There were 59 known lance corporals from the Parramatta region.",
-						               "More than 1000 privates were from Parramatta?",
-						               "Many soldiers were only in their 20s when embarked."]
-					</script>
-				<strong>Did you know:</strong> 
-				<script>
-					var tidbit = tidbits[Math.floor(Math.random() * tidbits.length)];
-					document.write(tidbit);
-				</script>
-				</p>
-			</div>
-		    <ul class="grid effect-1" id="grid">
-		    {% for soldier, photo_url in soldiers %}
-
-		        <li><a href="{% url 'soldier_detail' soldier.unique_id %}"><img src="{% static photo_url %}" alt="{{ soldier.name }} {{ soldier.surname }}"></a><h3>{{ soldier.rank }} {{ soldier.name }} {{ soldier.surname }}</h3></a></li>
-		    {% endfor %}
-		    </ul>
-		{% else %}
-		    <p>No results found.</p>
-		{% endif %}
+	<div class="row">
+		<div class="col-md-12">
+			<h1><span>&#8212;&#10087;</span> WW1 Parramatta Soldiers <span>&#10087;&#8212;</span></h1>
 		</div>
 	</div>
+
+	<div class="row">
+<div class="col-md-12">
+<ul class="list-inline">
+  <li role="presentation" class="active"><a href="{% url 'home' %}">Home</a></li>
+  <li role="presentation"><a href="{% url 'list_all_soldiers' %}">All Soldiers</a></li>
+</ul>
+</div>
+
+	</div>
+
+
+
+	<div class="row">
+	{% if soldiers %}
+		<div class="loading">
+			<div class="sk-spinner sk-spinner-wave">
+		      <div class="sk-rect1"></div>
+		      <div class="sk-rect2"></div>
+		      <div class="sk-rect3"></div>
+		      <div class="sk-rect4"></div>
+		      <div class="sk-rect5"></div>
+		    </div>
+
+
+			<p class="lead">Loading results...</p>
+
+			<p class="lead">
+				<script>
+					var tidbits = ["There were 59 known lance corporals from the Parramatta region.",
+					               "More than 1000 privates were from Parramatta?",
+					               "Many soldiers were only in their 20s when embarked."]
+				</script>
+			<strong>Did you know:</strong> 
+			<script>
+				var tidbit = tidbits[Math.floor(Math.random() * tidbits.length)];
+				document.write(tidbit);
+			</script>
+			</p>
+		</div>
+
+	    <ul class="grid effect-1" id="grid">
+	    {% for soldier, photo_url in soldiers %}
+
+	        <li><a href="{% url 'soldier_detail' soldier.unique_id %}"><img src="{% static photo_url %}" alt="{{ soldier.name }} {{ soldier.surname }}"></a><h3>{{ soldier.rank }} {{ soldier.name }} {{ soldier.surname }}</h3></a></li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No results found.</p>
+	{% endif %}
+	</div>
+
+
+		</div>
+	</div>
+
+	{% include "footer.include.html" %}
+
 </div>
 
 

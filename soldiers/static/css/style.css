@@ -13,6 +13,7 @@ body {
 
 a {
     color: #FF2A48;
+    color: #bf360c;
     text-decoration: none;
     outline: none;
 }
@@ -25,11 +26,20 @@ h1 span {
     color: rgba(0, 0, 0, 0.1);
 }
 
+/* Nav */
+
+ul.list-inline {
+    margin: 2px auto 20px;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+
 /* ================================ */
 
 body h1 {
     font-size: 5.6em;
-    margin: 1em auto;
+    margin: 1em auto 0.7em;
     text-align: center;
 }
 

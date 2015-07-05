@@ -14,6 +14,100 @@
 <script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
 <link href='//fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
 
+
+
+
+<!-- Maps Stuff -->
+<style type='text/css'>
+html,body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#main-map{
+	height: 600px;
+	width: 90%;
+}
+#overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index:10;
+}
+</style>
+
+<style type="text/css">
+	.ol-popup {
+		position: absolute;
+		background-color: white;
+		-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+		filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+		padding: 15px;
+		border-radius: 10px;
+		border: 1px solid #cccccc;
+		bottom: 12px;
+		left: -50px;
+	}
+	.ol-popup:after, .ol-popup:before {
+		top: 100%;
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		pointer-events: none;
+	}
+	.ol-popup:after {
+		border-top-color: white;
+		border-width: 10px;
+		left: 48px;
+		margin-left: -10px;
+	}
+	.ol-popup:before {
+		border-top-color: #cccccc;
+		border-width: 11px;
+		left: 48px;
+		margin-left: -11px;
+	}
+	.ol-popup-closer {
+		text-decoration: none;
+		position: absolute;
+		top: 2px;
+		right: 8px;
+	}
+	.ol-popup-closer:after {
+		content: "✖";
+	}
+</style>
+<!-- End Maps Stuff -->
+
+<!-- Arun's Map Style Additions -->
+<style type="text/css">
+#main-map{
+	width: 99%;
+}
+
+#story {
+	font-size: 1.4em;
+	/*font-style: italic;*/
+}
+
+/*h2 small {
+	font-style: italic;
+}*/
+</style>
+<!-- End Arun's Map Style Additions -->
+
+
+
+
+
+
+
+
 </head>
 
 <body id="soldier-detail">
@@ -25,6 +119,17 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h1>{{ soldier }}</h1>
+
+
+<div class="col-md-12">
+<ul class="list-inline">
+  <li role="presentation" class="active"><a href="{% url 'home' %}">Home</a></li>
+  <li role="presentation"><a href="{% url 'list_all_soldiers' %}">All Soldiers</a></li>
+</ul>
+</div>
+
+
+
 			<div class="row">
 				<div class="col-md-12">
 					<div class="pull-right"><a href="{% url 'soldier_records' soldier.unique_id %}" class="btn btn-default">View Soldier Records</a></div>
@@ -63,9 +168,142 @@
 
 		</div>
 	</div>
+
+	<div class="row">
+
+
+
+
+<hr>
+<script src="{% static "js/maps/ol.js" %}" type="text/javascript"></script>
+<script src="{% static "js/maps/d3.v3.min.js" %}", charset='utf-8'></script>
+<script src="{% static "js/maps/jquery-1.11.3.min.js" %}", charset='utf-8'></script>
+<script src="{% static "js/maps/overlay_jquery.js" %}", charset='utf-8'></script>
+
+
+<div class="col-md-2">
+<h2 style="margin-top: 0px;"><small>The</small><br> Journey</h2>
+<button id='start' class="btn btn-default">Start</button>
+<hr>
+<div id="story"></div>
+</div>
+
+<div class="col-md-10">
+	<div id="main-map"></div>
+	
+
+
+	<div style="display: none;" id="popup" class="ol-popup">
+			<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+			<div id="popup-content"></div>
+	</div>
+
+
 </div>
 
 
+
+
+
+
+
+
+	</div>
+
+
+
+{% include "footer.include.html" %}
+</div>
+
+
+
+
+<script>
+	var container = document.getElementById('popup');
+	var content = document.getElementById('popup-content');
+	var closer = document.getElementById('popup-closer');
+
+	closer.onclick = function() {
+		overlay.setPosition(undefined);
+		closer.blur();
+		return false;
+	};
+
+	var overlay;
+	var pop_overlay;
+	var main_svg;
+	var mapToPixel;
+	var map;
+
+	window.onload = function(){
+	    map = new ol.Map({
+	        layers: [
+	            new ol.layer.Tile({
+	                source: new ol.source.Stamen({
+										layer: 'watercolor'
+									})
+	            })
+	        ],
+	        renderer: 'canvas',
+	        target: 'main-map',
+	        view: new ol.View({
+	            center: ol.proj.transform([103,1], 'EPSG:4326', 'EPSG:3857'),
+	            zoom: 3
+	        })
+	    });
+		
+
+		setTimeout(function(){
+			overlay = d3.select('div.ol-viewport').append('div').attr('id','overlay');
+			main_svg = overlay.append('svg')
+							.style('position','relative')
+							.attr({
+								'width':'100%',
+								'height':'100%'
+							});
+
+
+			
+			main_svg.selectAll('circle').data(cities, function(d){return d.name}).enter().append('circle')
+				.attr('r','5').attr('fill','red')
+				.attr('cx',function(d){return mapToPixel(d.lon,d.lat)[0]})
+				.attr('cy',function(d){return mapToPixel(d.lon,d.lat)[1]})
+			main_svg.selectAll('g').data(cities, function(d){return d.name}).enter().append('g').append('text')
+				.attr({
+					'x': function(d){return mapToPixel(d.lon,d.lat)[0]},
+					'y': function(d){return mapToPixel(d.lon,d.lat)[1]},
+					'font-family':'trebuchet',
+					'font-size':'18px'
+				})
+				.text(function(d){ return d.name });
+		},500);
+
+		mapToPixel = function(lon,lat){
+			var point = [lon,lat];
+			point = ol.proj.transform(point,'EPSG:4326','EPSG:900913');
+			point = map.getPixelFromCoordinate(point);
+			return point;
+		}
+
+		map.on('postrender',function(event){
+			if(main_svg){
+			main_svg.selectAll('circle')
+				.attr('cx',function(d){return mapToPixel(d.lon,d.lat)[0]})
+				.attr('cy',function(d){return mapToPixel(d.lon,d.lat)[1]})
+			main_svg.selectAll('g').selectAll('text')
+				.attr({
+					'x': function(d){return mapToPixel(d.lon,d.lat)[0]+8},
+					'y': function(d){return mapToPixel(d.lon,d.lat)[1]+5.5}
+				})
+				.text(function(d){ return d.name });
+			main_svg.selectAll('path')
+				.attr('d',function(d){return lineFunction(d.path)})
+			
+			}
+		});
+	};
+	
+</script>
 
 
 </body>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+{% load staticfiles %}
+
+<title>All Soldiers - WW1 Parramatta Soldiers</title>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="all" href="{% static "css/style.css" %}" />
+<script type="text/javascript" src="{% static "js/modernizr.custom.js" %}"></script>
+<link href='//fonts.googleapis.com/css?family=Merriweather:400,900,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body id="home">
+
+
+
+
+
+<!-- <section class="grid-wrap"> -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1><span>&#8212;&#10087;</span> WW1 Parramatta Soldiers <span>&#10087;&#8212;</span></h1>
+		</div>
+	</div>
+
+	<div class="row">
+<div class="col-md-12">
+<ul class="list-inline">
+  <li role="presentation" class="active"><a href="{% url 'home' %}">Home</a></li>
+  <li role="presentation"><a href="{% url 'list_all_soldiers' %}">All Soldiers</a></li>
+</ul>
+</div>
+
+	</div>
+
+
+
+	<div class="row">
+	{% if soldiers %}
+
+	    <ul style="font-size: 1.6em; -webkit-columns: 200px 3; -moz-columns: 32% 3; columns: 200px 3;">
+	    {% for soldier, photo_url in soldiers %}
+
+	        <li style="margin-bottom: 0.5em;"><a href="{% url 'soldier_detail' soldier.unique_id %}">{{ soldier.name }} {{ soldier.surname }} ({{ soldier.rank }})</a></li>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No results found.</p>
+	{% endif %}
+	</div>
+
+
+		</div>
+	</div>
+
+	{% include "footer.include.html" %}
+
+</div>
+
+
+</body>
+</html>
