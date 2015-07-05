@@ -100,6 +100,10 @@
 					itemSelector: 'li',
 					transitionDuration : 0
 				} );
+
+				// Arun's addtions
+				$(".loading").hide();
+				// End Arun's additions
 				
 				if( Modernizr.cssanimations ) {
 					// the items already shown...

@@ -18,5 +18,6 @@ from soldiers import views
 
 urlpatterns = [
     url(r'^all', views.all_soldiers),
+    url(r'^(?P<unique_id>[0-9]+)/records/', views.soldier_records, name='soldier_records'),
     url(r'^(?P<unique_id>[0-9]+)', views.soldier_detail, name='soldier_detail'),
 ]

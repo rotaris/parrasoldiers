@@ -27,7 +27,12 @@ class Soldier(models.Model):
    
     # There probably is a better way to do this than hardcoding it
     def get_photo_url(self):
-        filename = str(self.unique_id).zfill(4)
+        #filename = str(self.unique_id).zfill(4)
+        filename = self.get_unique_id()
         #return "/static/soldier_photos/0" + filename + ".jpg"
         #return "0" + filename + ".jpg"
         return "soldier_photos/0" + filename + ".jpg"
+
+    def get_unique_id(self):
+        unique_id = str(self.unique_id).zfill(4)
+        return unique_id
