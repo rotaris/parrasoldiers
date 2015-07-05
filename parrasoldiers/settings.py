@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'soldiers',
     'storages',
+    #'endless_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,6 +119,12 @@ STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', "NO_ACCESS_KEY_SET_IN_ENV")
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', "NO_SECRET_KEY_SET_IN_ENV")
 AWS_STORAGE_BUCKET_NAME = 'parrasoldiers'
+
+
+#from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+#TEMPLATE_CONTEXT_PROCESSORS += (
+#    'django.core.context_processors.request',
+#)
 
 
 # ========== HEROKU STUFF ============ #
